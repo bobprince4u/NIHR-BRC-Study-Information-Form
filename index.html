@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NIHR BRC Study Information Form — Accian Research</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --navy: #0f2744;
+        --navy2: #1b3a5c;
+        --gold: #c8a951;
+        --gold2: #e2c97e;
+        --white: #ffffff;
+        --bg: #f0f5fa;
+        --card: #ffffff;
+        --border: #d8e4f0;
+        --text: #1a1a2e;
+        --muted: #64748b;
+        --danger: #dc2626;
+        --success: #16a34a;
+        --input-bg: #f8fafc;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        padding: 40px 16px 60px;
+      }
+
+      /* ── HEADER ── */
+      .page-header {
+        max-width: 740px;
+        margin: 0 auto 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .brand {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--navy);
+        letter-spacing: -0.02em;
+      }
+      .brand span {
+        color: var(--gold);
+      }
+      .header-tag {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        background: var(--white);
+        border: 1px solid var(--border);
+        padding: 5px 12px;
+        border-radius: 999px;
+      }
+
+      /* ── CARD ── */
+      .card {
+        max-width: 740px;
+        margin: 0 auto;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 4px 24px rgba(15, 39, 68, 0.07);
+      }
+
+      /* ── CARD HEADER ── */
+      .card-head {
+        background: var(--navy);
+        padding: 24px 32px;
+      }
+      .card-head-label {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 8px;
+      }
+      .card-head-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #fff;
+        line-height: 1.3;
+        margin-bottom: 6px;
+      }
+      .card-head-sub {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      /* ── PROJECT TITLE BAND ── */
+      .project-band {
+        background: #eef4fa;
+        border-bottom: 1px solid var(--border);
+        padding: 14px 32px;
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+      }
+      .project-band-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--navy);
+        white-space: nowrap;
+        padding-top: 1px;
+      }
+      .project-band-title {
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      /* ── FORM BODY ── */
+      .form-body {
+        padding: 28px 32px;
+      }
+
+      /* ── SECTION LABEL ── */
+      .section-label {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 14px;
+        margin-top: 28px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--border);
+      }
+      .section-label:first-child {
+        margin-top: 0;
+      }
+
+      /* ── GRID ── */
+      .grid-3 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 14px;
+      }
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      @media (max-width: 560px) {
+        .grid-3 {
+          grid-template-columns: 1fr;
+        }
+        .grid-2 {
+          grid-template-columns: 1fr;
+        }
+        .form-body {
+          padding: 20px 18px;
+        }
+        .card-head {
+          padding: 20px 18px;
+        }
+        .project-band {
+          padding: 14px 18px;
+        }
+      }
+
+      /* ── FIELD ── */
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .field label {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--navy);
+      }
+      .field .hint {
+        font-size: 11px;
+        color: var(--muted);
+        font-weight: 400;
+      }
+
+      /* ── INPUTS ── */
+      input[type="text"],
+      input[type="number"],
+      select,
+      textarea {
+        width: 100%;
+        padding: 10px 13px;
+        border: 1.5px solid var(--border);
+        border-radius: 7px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 14px;
+        color: var(--text);
+        background: var(--input-bg);
+        outline: none;
+        transition: border-color 0.15s;
+        -webkit-appearance: none;
+      }
+      input[type="text"]:focus,
+      input[type="number"]:focus,
+      select:focus,
+      textarea:focus {
+        border-color: var(--gold);
+        background: #fff;
+      }
+      textarea {
+        resize: vertical;
+        min-height: 110px;
+        line-height: 1.6;
+      }
+      select {
+        cursor: pointer;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        padding-right: 36px;
+      }
+
+      /* ── WORD COUNT ── */
+      .word-count {
+        text-align: right;
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 4px;
+        transition: color 0.15s;
+      }
+      .word-count.over {
+        color: var(--danger);
+        font-weight: 600;
+      }
+
+      /* ── RADIO GROUP ── */
+      .radio-group {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .radio-pill {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 16px;
+        border: 1.5px solid var(--border);
+        border-radius: 7px;
+        cursor: pointer;
+        font-size: 13px;
+        color: var(--muted);
+        transition: all 0.15s;
+        user-select: none;
+        background: var(--input-bg);
+      }
+      .radio-pill:hover {
+        border-color: var(--gold);
+        color: var(--text);
+      }
+      .radio-pill input[type="radio"] {
+        accent-color: var(--navy);
+        width: 15px;
+        height: 15px;
+      }
+      .radio-pill.selected {
+        border-color: var(--navy);
+        background: #eef4fa;
+        color: var(--navy);
+        font-weight: 500;
+      }
+
+      /* ── NESTED BOX ── */
+      .nested-box {
+        background: #f8fafc;
+        border: 1px solid var(--border);
+        border-radius: 9px;
+        padding: 18px 20px;
+        margin-top: 14px;
+      }
+      .nested-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .nested-label {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--navy);
+      }
+      .recruits-count {
+        margin-top: 14px;
+        padding-top: 14px;
+        border-top: 1px solid var(--border);
+        display: none;
+      }
+
+      /* ── DIVIDER ── */
+      .divider {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: 24px 0;
+      }
+
+      /* ── FOOTER ACTIONS ── */
+      .card-footer {
+        border-top: 1px solid var(--border);
+        padding: 18px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        background: #fafbfc;
+      }
+      .footer-msg {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .footer-msg.success {
+        color: var(--success);
+        font-weight: 500;
+      }
+      .footer-msg.error {
+        color: var(--danger);
+        font-weight: 500;
+      }
+      .btn-row {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .btn {
+        padding: 10px 20px;
+        border-radius: 7px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        border: 1.5px solid var(--border);
+        background: var(--white);
+        color: var(--text);
+        transition: all 0.15s;
+      }
+      .btn:hover {
+        border-color: var(--navy);
+        color: var(--navy);
+      }
+      .btn-primary {
+        background: var(--navy);
+        color: #fff;
+        border-color: var(--navy);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .btn-primary:hover {
+        background: var(--navy2);
+        border-color: var(--navy2);
+      }
+      .btn-primary svg {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+      }
+
+      /* ── PAGE FOOTER ── */
+      .page-footer {
+        text-align: center;
+        margin-top: 28px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .page-footer a {
+        color: var(--navy);
+        font-weight: 500;
+        text-decoration: none;
+      }
+      .page-footer a:hover {
+        color: var(--gold);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="brand">ACC<span>IAN</span></div>
+      <div class="header-tag">Research Support</div>
+    </header>
+
+    <div class="card">
+      <!-- Card header -->
+      <div class="card-head">
+        <div class="card-head-label">NIHR BRC Annual Reporting</div>
+        <div class="card-head-title">Study Information Request Form</div>
+        <div class="card-head-sub">
+          Please complete all applicable fields. Required for annual reporting
+          back to the NIHR.
+        </div>
+      </div>
+
+      <!-- Project title band -->
+      <div class="project-band">
+        <span class="project-band-label">Project:</span>
+        <span class="project-band-title">
+          Multicentre, double‑blind, randomised, placebo‑controlled trial of
+          add‑on rituximab for early diagnosed moderate to severe systemic lupus
+          erythematosus
+        </span>
+      </div>
+
+      <!-- Form -->
+      <div class="form-body">
+        <!-- Section 1: IDs -->
+        <div class="section-label">Registration IDs</div>
+        <div class="grid-3">
+          <div class="field">
+            <label for="iras">IRAS ID</label>
+            <span class="hint">If applicable</span>
+            <input type="text" id="iras" placeholder="e.g. 123456" />
+          </div>
+          <div class="field">
+            <label for="cpms">CPMS ID</label>
+            <span class="hint">If applicable</span>
+            <input type="text" id="cpms" placeholder="e.g. 56789" />
+          </div>
+          <div class="field">
+            <label for="rec">REC ID</label>
+            <span class="hint">NHS REC or local UoL REC</span>
+            <input type="text" id="rec" placeholder="e.g. 22/NW/0001" />
+          </div>
+        </div>
+
+        <!-- Section 2: Summary -->
+        <div class="section-label" style="margin-top: 24px">
+          Project Summary
+        </div>
+        <div class="field">
+          <label for="summary">Project summary</label>
+          <span class="hint">
+            Required only if no IRAS / CPMS / NHS REC ID is available. Maximum
+            300 words. If IDs are provided, the summary will be obtained from
+            publicly available IRAS/HRA records.
+          </span>
+          <textarea
+            id="summary"
+            placeholder="Enter a project summary of up to 300 words..."
+          ></textarea>
+          <div class="word-count" id="word-count">0 / 300 words</div>
+        </div>
+
+        <!-- Section 3: Sensitivity & Status -->
+        <div class="section-label" style="margin-top: 24px">
+          Project Details
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Is the project sensitive?</label>
+            <span class="hint"
+              >Select Y for commercially sensitive content or summaries not for
+              public release</span
+            >
+            <div class="radio-group" style="margin-top: 6px">
+              <label class="radio-pill" id="pill-sens-y">
+                <input
+                  type="radio"
+                  name="sensitive"
+                  value="Y"
+                  onchange="updatePills('sensitive')"
+                />
+                Yes
+              </label>
+              <label class="radio-pill" id="pill-sens-n">
+                <input
+                  type="radio"
+                  name="sensitive"
+                  value="N"
+                  onchange="updatePills('sensitive')"
+                />
+                No
+              </label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="status">Project status</label>
+            <span class="hint">Select the current status of the project</span>
+            <select id="status" style="margin-top: 6px">
+              <option value="">— Please select —</option>
+              <option value="In setup">In setup</option>
+              <option value="Open / active / in follow up">
+                Open / active / in follow up
+              </option>
+              <option value="Completed and closed">Completed and closed</option>
+              <option value="Suspended / paused">Suspended / paused</option>
+              <option value="Withdrawn">Withdrawn</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Section 4: Recruitment -->
+        <div class="section-label" style="margin-top: 24px">
+          Patient Recruitment
+        </div>
+        <div class="nested-box">
+          <div class="nested-row">
+            <span class="nested-label">Does the study recruit patients?</span>
+            <div class="radio-group">
+              <label class="radio-pill" id="pill-rec-y">
+                <input
+                  type="radio"
+                  name="recruits"
+                  value="Y"
+                  onchange="
+                    toggleRecruits();
+                    updatePills('recruits');
+                  "
+                />
+                Yes
+              </label>
+              <label class="radio-pill" id="pill-rec-n">
+                <input
+                  type="radio"
+                  name="recruits"
+                  value="N"
+                  onchange="
+                    toggleRecruits();
+                    updatePills('recruits');
+                  "
+                />
+                No
+              </label>
+            </div>
+          </div>
+          <div class="recruits-count" id="recruited-row">
+            <div class="field">
+              <label for="recruited">Number of patients recruited</label>
+              <span class="hint">1 April 2025 – 31 March 2026</span>
+              <input
+                type="number"
+                id="recruited"
+                min="0"
+                placeholder="e.g. 42"
+                style="max-width: 180px; margin-top: 6px"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 5: Paediatric -->
+        <div class="section-label" style="margin-top: 24px">
+          Paediatric Research
+        </div>
+        <div class="field">
+          <label>Paediatric research (if applicable)?</label>
+          <span class="hint"
+            >Indicate whether this study involves paediatric research</span
+          >
+          <div class="radio-group" style="margin-top: 6px">
+            <label class="radio-pill" id="pill-paed-y">
+              <input
+                type="radio"
+                name="paediatric"
+                value="Y"
+                onchange="updatePills('paediatric')"
+              />
+              Yes
+            </label>
+            <label class="radio-pill" id="pill-paed-n">
+              <input
+                type="radio"
+                name="paediatric"
+                value="N"
+                onchange="updatePills('paediatric')"
+              />
+              No
+            </label>
+            <label class="radio-pill selected" id="pill-paed-na">
+              <input
+                type="radio"
+                name="paediatric"
+                value="N/A"
+                checked
+                onchange="updatePills('paediatric')"
+              />
+              N/A
+            </label>
+          </div>
+        </div>
+      </div>
+      <!-- /form-body -->
+
+      <!-- Footer -->
+      <div class="card-footer">
+        <div class="footer-msg" id="footer-msg"></div>
+        <div class="btn-row">
+          <button class="btn" onclick="clearForm()">Clear form</button>
+          <button class="btn btn-primary" onclick="downloadForm()">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+              />
+            </svg>
+            Download completed form
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      Form provided by
+      <a href="https://accian.co.uk" target="_blank"
+        >Accian Research Consultancy</a
+      >
+      &nbsp;·&nbsp; Complete and return to
+      <a href="mailto:research@accian.co.uk">research@accian.co.uk</a>
+    </div>
+
+    <script>
+      // ── Word counter ──
+      document.getElementById("summary").addEventListener("input", function () {
+        const words =
+          this.value.trim() === "" ? 0 : this.value.trim().split(/\s+/).length;
+        const el = document.getElementById("word-count");
+        el.textContent = words + " / 300 words";
+        el.className = "word-count" + (words > 300 ? " over" : "");
+      });
+
+      // ── Show/hide recruit count ──
+      function toggleRecruits() {
+        const yes = document.querySelector('input[name="recruits"][value="Y"]');
+        document.getElementById("recruited-row").style.display =
+          yes && yes.checked ? "block" : "none";
+      }
+
+      // ── Style selected radio pills ──
+      function updatePills(name) {
+        document
+          .querySelectorAll('input[name="' + name + '"]')
+          .forEach(function (r) {
+            const pill = r.closest(".radio-pill");
+            if (pill) pill.classList.toggle("selected", r.checked);
+          });
+      }
+
+      // ── Helpers ──
+      function getVal(id) {
+        return (document.getElementById(id) || {}).value || "";
+      }
+      function getRadio(name) {
+        const el = document.querySelector('input[name="' + name + '"]:checked');
+        return el ? el.value : "Not answered";
+      }
+
+      // ── Clear ──
+      function clearForm() {
+        ["iras", "cpms", "rec", "summary", "recruited"].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.value = "";
+        });
+        document.getElementById("status").value = "";
+        document.querySelectorAll('input[type="radio"]').forEach(function (r) {
+          r.checked = false;
+        });
+        document.querySelector(
+          'input[name="paediatric"][value="N/A"]',
+        ).checked = true;
+        document.querySelectorAll(".radio-pill").forEach(function (p) {
+          p.classList.remove("selected");
+        });
+        document.querySelector("#pill-paed-na").classList.add("selected");
+        document.getElementById("recruited-row").style.display = "none";
+        document.getElementById("word-count").textContent = "0 / 300 words";
+        document.getElementById("word-count").className = "word-count";
+        document.getElementById("footer-msg").textContent = "";
+        document.getElementById("footer-msg").className = "footer-msg";
+      }
+
+      // ── Download ──
+      function downloadForm() {
+        const recruits = getRadio("recruits");
+        const recruitedLine =
+          recruits === "Y"
+            ? "\n  Number recruited (1 Apr 2025 – 31 Mar 2026): " +
+              (getVal("recruited") || "Not provided")
+            : "";
+
+        const lines = [
+          "================================================================",
+          "  NIHR BRC ANNUAL REPORTING — STUDY INFORMATION FORM",
+          "================================================================",
+          "",
+          "  Project title:",
+          "  Multicentre, double-blind, randomised, placebo-controlled",
+          "  trial of add-on rituximab for early diagnosed moderate to",
+          "  severe systemic lupus erythematosus",
+          "",
+          "----------------------------------------------------------------",
+          "  REGISTRATION IDs",
+          "----------------------------------------------------------------",
+          "  IRAS ID  : " + (getVal("iras") || "N/A"),
+          "  CPMS ID  : " + (getVal("cpms") || "N/A"),
+          "  REC ID   : " + (getVal("rec") || "N/A"),
+          "",
+          "----------------------------------------------------------------",
+          "  PROJECT SUMMARY",
+          "----------------------------------------------------------------",
+          "  " + (getVal("summary").replace(/\n/g, "\n  ") || "(not provided)"),
+          "",
+          "----------------------------------------------------------------",
+          "  PROJECT DETAILS",
+          "----------------------------------------------------------------",
+          "  Sensitive (Y/N)  : " + getRadio("sensitive"),
+          "  Project status   : " + (getVal("status") || "Not selected"),
+          "",
+          "----------------------------------------------------------------",
+          "  PATIENT RECRUITMENT",
+          "----------------------------------------------------------------",
+          "  Recruits patients (Y/N) : " + recruits + recruitedLine,
+          "",
+          "----------------------------------------------------------------",
+          "  PAEDIATRIC RESEARCH",
+          "----------------------------------------------------------------",
+          "  Paediatric research (Y/N/N/A) : " + getRadio("paediatric"),
+          "",
+          "================================================================",
+          "  Form completed via Accian Research Support",
+          "  accian.co.uk  |  research@accian.co.uk",
+          "  Date: " +
+            new Date().toLocaleDateString("en-GB", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            }),
+          "================================================================",
+        ];
+
+        const blob = new Blob([lines.join("\n")], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download =
+          "NIHR_BRC_Study_Info_" +
+          new Date().toISOString().split("T")[0] +
+          ".txt";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        const msg = document.getElementById("footer-msg");
+        msg.textContent =
+          "Downloaded successfully. Please email the file to research@accian.co.uk";
+        msg.className = "footer-msg success";
+      }
+    </script>
+  </body>
+</html>
