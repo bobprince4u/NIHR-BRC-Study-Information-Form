@@ -102,12 +102,12 @@ No manual update is needed each year.
 
 ## Email Submission
 
-Completed forms are submitted via **Formspree** to `k.o.ohuchukwu@leeds.ac.uk`.
+Completed forms are submitted via **Formspree** to `example@email.com`.
 
 - **Formspree Form ID:** `xdabzbvx`
 - **Formspree Dashboard:** [formspree.io](https://formspree.io) — log in to view submissions, set up email notifications, and export responses
 
-> **Important:** Formspree requires the destination email to be verified. Check your Formspree dashboard to confirm `k.o.ohuchukwu@leeds.ac.uk` is verified, otherwise submissions will not be delivered.
+> **Important:** Formspree requires the destination email to be verified. Check your Formspree dashboard to confirm `example@email.com` is verified, otherwise submissions will not be delivered.
 
 ---
 
