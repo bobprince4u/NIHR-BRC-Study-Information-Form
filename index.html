@@ -1038,14 +1038,6 @@
       }
 
       function validate() {
-        if (!getVal("inv-name").trim()) {
-          showMsg("Please enter your full name.", "error");
-          return false;
-        }
-        if (!getVal("inv-email").trim()) {
-          showMsg("Please enter your email address.", "error");
-          return false;
-        }
         if (!getVal("status")) {
           showMsg("Please select a project status.", "error");
           return false;
@@ -1068,8 +1060,7 @@
         var projectTitle = decodeURIComponent(urlTitle || "");
         var payload = {
           _subject: "NIHR BRC Study Information \u2014 " + projectTitle,
-          investigator_name: getVal("inv-name"),
-          investigator_email: getVal("inv-email"),
+
           project_title: projectTitle,
           iras_id: getVal("iras") || "N/A",
           cpms_id: getVal("cpms") || "N/A",
@@ -1105,7 +1096,7 @@
           });
           if (res.ok) {
             showMsg(
-              "\u2713 Submitted successfully. Your response has been sent to the Leeds BRC coordinator.",
+              "\u2713 Submitted successfully. Your response has been sent to the Leeds Impact. Information and Reporting coordinator.",
               "success",
             );
             btn.innerHTML = "\u2713 Submitted";
@@ -1129,8 +1120,7 @@
         var title = decodeURIComponent(
           urlTitle || (titleEl ? titleEl.value : "") || "(not set)",
         );
-        var invName = getVal("inv-name") || "&mdash;";
-        var invEmail = getVal("inv-email") || "&mdash;";
+
         var irasId = getVal("iras") || "N/A";
         var cpmsId = getVal("cpms") || "N/A";
         var recId = getVal("rec") || "N/A";
