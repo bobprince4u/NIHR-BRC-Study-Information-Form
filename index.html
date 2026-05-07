@@ -680,21 +680,11 @@
       <div id="investigator-form" style="display: none">
         <div class="form-body">
           <div class="inv-email-box">
-            <label class="inv-email-label"
-              >Your name &amp; email address
-              <span style="color: var(--danger)">*</span></label
+            <label class="inv-email-label">
+              <span style="color: var(--danger)">NIHR-BRC</span></label
             >
-            <div class="inv-email-hint">
-              So the coordinator can follow up with you if needed.
-            </div>
-            <div class="grid-2">
-              <input type="text" id="inv-name" placeholder="Full name" />
-              <input
-                type="email"
-                id="inv-email"
-                placeholder="your@leeds.ac.uk"
-              />
-            </div>
+            <div class="inv-email-hint"></div>
+            <div class="grid-2"></div>
           </div>
 
           <div class="section-label">Registration IDs</div>
@@ -982,7 +972,7 @@
         );
         var bodyText =
           "Dear Investigator,\n\n" +
-          "Please could you complete the NIHR BRC Study Information Form for the following project:\n\n" +
+          " Please could you provide the following information for the study listed below (identified for inclusion in BRC  reporting as PI or Co-I receive BRC funding.  This information is required for annual reporting back to the NIHR.:\n\n" +
           "  " +
           title +
           "\n\n" +
@@ -1095,7 +1085,7 @@
         };
         try {
           /* ── Replace YOUR_FORM_ID with your Formspree form ID (free at formspree.io) ── */
-          var FORMSPREE_ID = "xgodyrjq";
+          var FORMSPREE_ID = "xdabzbjo";
           if (FORMSPREE_ID === "YOUR_FORM_ID") {
             showMsg(
               "\u26a0 Formspree ID not yet configured. Download the form and email it manually.",
