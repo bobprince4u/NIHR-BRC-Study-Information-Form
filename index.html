@@ -679,14 +679,6 @@
       <!-- INVESTIGATOR FORM -->
       <div id="investigator-form" style="display: none">
         <div class="form-body">
-          <div class="inv-email-box">
-            <label class="inv-email-label">
-              <span style="color: var(--danger)">NIHR-BRC</span></label
-            >
-            <div class="inv-email-hint"></div>
-            <div class="grid-2"></div>
-          </div>
-
           <div class="section-label">Registration IDs</div>
           <div class="grid-3">
             <div class="field">
@@ -804,7 +796,9 @@
             <div class="recruits-count" id="recruited-row">
               <div class="field">
                 <label for="recruited">Number of patients recruited</label>
-                <span class="hint">1 April 2025 – 31 March 2026</span>
+                <span class="hint" id="fin-year-hint"
+                  >1 April 2025 – 31 March 2026</span
+                >
                 <input
                   type="number"
                   id="recruited"
@@ -971,9 +965,8 @@
           "NIHR BRC Study Information Form \u2014 Action Required",
         );
         var bodyText =
-          "Dear Investigator,\n\n" +
-          " Please could you provide the following information for the study listed below (identified for inclusion in BRC  reporting as PI or Co-I receive BRC funding.  This information is required for annual reporting back to the NIHR.:\n\n" +
-          "  " +
+          "Dear Colleague,\n\n" +
+          "Please could you provide the following information for the study listed below, identified for inclusion in BRC reporting as PI or Co-I receiving BRC funding. This information is required for annual reporting back to the NIHR. Alternatively, please indicate if this project should not be included in the BRC reporting.\n\n" +
           title +
           "\n\n" +
           "Click the link below to open the form. The project title is pre-filled \u2014 you only need to complete the remaining fields and click Submit.\n\n" +
@@ -998,6 +991,18 @@
           confirm.style.display = "none";
         }, 5000);
       }
+
+      // Dynamic financial year: Apr–Mar cycle
+      (function () {
+        var now = new Date();
+        var yr = now.getFullYear();
+        var month = now.getMonth(); // 0=Jan, 3=Apr
+        var startYr = month >= 3 ? yr : yr - 1;
+        var endYr = startYr + 1;
+        var label = "1 April " + startYr + " \u2013 31 March " + endYr;
+        var el = document.getElementById("fin-year-hint");
+        if (el) el.textContent = label;
+      })();
 
       var summaryEl = document.getElementById("summary");
       if (summaryEl) {
@@ -1059,8 +1064,7 @@
         var recruits = getRadio("recruits");
         var projectTitle = decodeURIComponent(urlTitle || "");
         var payload = {
-          _subject: "NIHR BRC Study Information \u2014 " + projectTitle,
-
+          _subject: "NIHR BRC Study Information — " + projectTitle,
           project_title: projectTitle,
           iras_id: getVal("iras") || "N/A",
           cpms_id: getVal("cpms") || "N/A",
@@ -1230,14 +1234,6 @@
           title +
           "</div>" +
           "</div>" +
-          '<div class="investigator-band">' +
-          '<div class="inv-item"><div class="inv-label">Investigator</div><div class="inv-value">' +
-          invName +
-          "</div></div>" +
-          '<div class="inv-item"><div class="inv-label">Email</div><div class="inv-value">' +
-          invEmail +
-          "</div></div>" +
-          "</div>" +
           '<div class="section">' +
           '<div class="section-head">Registration IDs</div>' +
           '<table><tr><td class="lbl">IRAS ID</td><td class="val">' +
@@ -1298,15 +1294,7 @@
       }
 
       function clearForm() {
-        [
-          "inv-name",
-          "inv-email",
-          "iras",
-          "cpms",
-          "rec",
-          "summary",
-          "recruited",
-        ].forEach(function (id) {
+        ["iras", "cpms", "rec", "summary", "recruited"].forEach(function (id) {
           var el = document.getElementById(id);
           if (el) el.value = "";
         });
