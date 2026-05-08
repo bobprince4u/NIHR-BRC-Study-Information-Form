@@ -1081,15 +1081,7 @@
         try {
           /* ── Replace YOUR_FORM_ID with your Formspree form ID (free at formspree.io) ── */
           var FORMSPREE_ID = "xdabzbjo";
-          if (FORMSPREE_ID === "YOUR_FORM_ID") {
-            showMsg(
-              "\u26a0 Formspree ID not yet configured. Download the form and email it manually.",
-              "error",
-            );
-            btn.disabled = false;
-            btn.innerHTML = "\u2709 Submit to Leeds BRC";
-            return;
-          }
+
           var res = await fetch("https://formspree.io/f/" + FORMSPREE_ID, {
             method: "POST",
             headers: {
@@ -1100,7 +1092,7 @@
           });
           if (res.ok) {
             showMsg(
-              "\u2713 Submitted successfully. Your response has been sent to the Leeds Impact. Information and Reporting coordinator.",
+              "\u2713 Submitted successfully. Your response has been sent to the Leeds BRC coordinator.",
               "success",
             );
             btn.innerHTML = "\u2713 Submitted";
