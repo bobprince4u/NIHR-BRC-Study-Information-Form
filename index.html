@@ -1056,15 +1056,77 @@
         el.className = "footer-msg " + (type || "");
       }
 
+      function buildEmailBody() {
+        var recruits = getRadio("recruits");
+        var projectTitle = decodeURIComponent(urlTitle || "");
+        return (
+          "NIHR BRC STUDY INFORMATION FORM\n" +
+          "================================\n\n" +
+          "Project title: " +
+          projectTitle +
+          "\n\n" +
+          "REGISTRATION IDs\n" +
+          "IRAS ID  : " +
+          (getVal("iras") || "N/A") +
+          "\n" +
+          "CPMS ID  : " +
+          (getVal("cpms") || "N/A") +
+          "\n" +
+          "REC ID   : " +
+          (getVal("rec") || "N/A") +
+          "\n\n" +
+          "PROJECT SUMMARY\n" +
+          (getVal("summary") || "(not provided)") +
+          "\n\n" +
+          "PROJECT DETAILS\n" +
+          "Sensitive        : " +
+          getRadio("sensitive") +
+          "\n" +
+          "Project status   : " +
+          (getVal("status") || "Not selected") +
+          "\n" +
+          "Recruits patients: " +
+          recruits +
+          "\n" +
+          (recruits === "Y"
+            ? "Patients recruited: " +
+              (getVal("recruited") || "Not provided") +
+              "\n"
+            : "") +
+          "Paediatric       : " +
+          getRadio("paediatric") +
+          "\n\n" +
+          "Submitted: " +
+          new Date().toLocaleString("en-GB")
+        );
+      }
+
+      function fallbackMailto() {
+        var projectTitle = decodeURIComponent(urlTitle || "");
+        var subject = encodeURIComponent(
+          "NIHR BRC Study Information \u2014 " + projectTitle,
+        );
+        var body = encodeURIComponent(buildEmailBody());
+        window.open(
+          "mailto:k.o.ohuchukwu@leeds.ac.uk?subject=" +
+            subject +
+            "&body=" +
+            body,
+        );
+      }
+
       async function submitForm() {
         if (!validate()) return;
         var btn = document.getElementById("submit-btn");
         btn.disabled = true;
         btn.innerHTML = '<span class="spinner"></span> Submitting\u2026';
+
         var recruits = getRadio("recruits");
         var projectTitle = decodeURIComponent(urlTitle || "");
+
         var payload = {
-          _subject: "NIHR BRC Study Information — " + projectTitle,
+          _subject: "NIHR BRC Study Information \u2014 " + projectTitle,
+          _replyto: "noreply@leeds.ac.uk",
           project_title: projectTitle,
           iras_id: getVal("iras") || "N/A",
           cpms_id: getVal("cpms") || "N/A",
@@ -1078,11 +1140,21 @@
           paediatric: getRadio("paediatric"),
           submitted_at: new Date().toLocaleString("en-GB"),
         };
-        try {
-          /* ── Replace YOUR_FORM_ID with your Formspree form ID (free at formspree.io) ── */
-          var FORMSPREE_ID = "xzdojbaq";
 
-          var res = await fetch("https://formspree.io/f/" + FORMSPREE_ID, {
+        // Warn if running from local file — Formspree won't work
+        if (window.location.protocol === "file:") {
+          showMsg(
+            "\u26a0 This form must be hosted online for submissions to work. Opening email fallback instead...",
+            "error",
+          );
+          btn.disabled = false;
+          btn.innerHTML = "\u2709 Submit to Leeds BRC";
+          fallbackMailto();
+          return;
+        }
+
+        try {
+          var res = await fetch("https://formspree.io/f/xzdojbaq", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -1090,23 +1162,45 @@
             },
             body: JSON.stringify(payload),
           });
+
+          var data = {};
+          try {
+            data = await res.json();
+          } catch (e) {}
+
           if (res.ok) {
             showMsg(
-              "\u2713 Submitted successfully. Your response has been sent to the Leeds Impact. Information and Reporting coordinator",
+              "\u2713 Submitted successfully. Your response has been sent to k.o.ohuchukwu@leeds.ac.uk",
               "success",
             );
             btn.innerHTML = "\u2713 Submitted";
             btn.style.background = "var(--success)";
           } else {
-            throw new Error("Server error");
+            // Show exact Formspree error so we know what is wrong
+            var errMsg =
+              data.error ||
+              (data.errors && data.errors[0] && data.errors[0].message) ||
+              "Error " + res.status;
+            showMsg(
+              "Formspree error: " +
+                errMsg +
+                " \u2014 using email fallback instead.",
+              "error",
+            );
+            btn.disabled = false;
+            btn.innerHTML = "\u2709 Submit to Leeds BRC";
+            fallbackMailto();
           }
         } catch (err) {
           showMsg(
-            "Submission failed. Please download the form and email it to k.o.ohuchukwu@leeds.ac.uk",
+            "Network error (" +
+              err.message +
+              ") \u2014 opening email fallback instead.",
             "error",
           );
           btn.disabled = false;
           btn.innerHTML = "\u2709 Submit to Leeds BRC";
+          fallbackMailto();
         }
       }
 
